@@ -1,0 +1,42 @@
+name:  Commit & PR Title Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint commit messages & PR title
+        uses: wagoid/commitlint-github-action@v4
+        with:
+          config: |
+            extends:
+              - "@commitlint/config-conventional"
+            rules:
+              type-enum:
+                - 2
+                - always
+                - [
+                    "feat",
+                    "fix",
+                    "docs",
+                    "style",
+                    "refactor",
+                    "test",
+                    "chore",
+                    "ci",
+                    "build",
+                    "perf"
+                  ]
+          titleAndCommits: true
+          allowMergeCommits: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}

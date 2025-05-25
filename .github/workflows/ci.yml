@@ -1,0 +1,39 @@
+name: CI – Docker & Node Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v2
+      - run: docker build ./backend  -t exam-bud-backend:ci
+      - run: docker build ./frontend -t exam-bud-frontend:ci
+
+  node-checks:
+    name: 🔧 Install & Build in Node
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ backend, frontend ]
+    defaults:
+      run:
+        working-directory: ${{ matrix.service }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: |
+          if [ "${{ matrix.service }}" = "frontend" ]; then
+            npm run build
+          else
+            npx prisma generate
+          fi
