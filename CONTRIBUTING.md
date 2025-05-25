@@ -107,8 +107,10 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0
 ```
 feat(ui): add dark-mode
 feat(fix): fixed the backend logic
+feat: did this
+fix: fixed that
 ```
-
+We wont't be very strict with this but nice to write proper commit messages.
 ---
 
 ### Before making a PR
