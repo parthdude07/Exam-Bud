@@ -10,7 +10,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <h1>Branches</h1>
+      <h2>Branches</h2>
       <ul>
         {branches.map(b =>
           <li key={b.id}>
