@@ -26,8 +26,8 @@ If you’re unsure about something or need help getting started:
 
 That's okay — everyone starts somewhere! 😊  
 Start by learning the basics:
-- [Git & GitHub Crash Course](https://www.youtube.com/watch?v=RGOj5yH7evk)
 - [Doc to help you get started](https://medium.com/@ritankar.saha786/understanding-git-and-github-b79bb84de9e8) for terms like fork, pull request, branch, etc.
+- [Git & GitHub Crash Course](https://www.youtube.com/watch?v=RGOj5yH7evk)
 
 ---
 
@@ -37,7 +37,7 @@ Awesome! 🎉 Let’s walk you through:
 - Check out the [open issues](https://github.com/bsoc-bitbyte/ExamBud/issues).
 - Look for issues labeled [`good first issue`](https://github.com/bsoc-bitbyte/ExamBud/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 - Comment on an issue you'd like to work on and ask to be assigned.
-- Follow this [pull request tutorial](https://medium.com/@ritankar.saha786/understanding-git-and-github-b79bb84de9e8) to make your first PR.
+- Follow this [pull request tutorial blog](https://medium.com/@ritankar.saha786/understanding-git-and-github-b79bb84de9e8) to make your first PR.
 
 Feel free to ask questions in the issue or on Discord if you're stuck.
 
@@ -77,6 +77,7 @@ Keep your code clean and consistent:
 - Keep indentation and formatting consistent with the codebase.
 - Write clear and concise comments when needed.
 - Follow any existing patterns already in the code.
+- More about this will be discussed in the session, be sure to join that
 
 If you're unsure about style, check how other parts of the code are written and follow suit.
 
@@ -115,6 +116,7 @@ feat(fix): fixed the backend logic
 Read: [How to make a pull request](https://medium.com/@ritankar.saha786/understanding-git-and-github-b79bb84de9e8)  -- Scroll Down to the Bottom. 
 Make sure:
 - Your code is tested (if applicable)
+- Attach Screenshots and Videos if applicable
 - Follows the style guide
 - Follows commit message rules
 - Issue is linked or referenced
@@ -126,5 +128,5 @@ See you in the PRs! 🎉
 
 Maintainers 
 
-Ritankar Saha
-Harshil Khandelwal
+[Ritankar Saha](https://github.com/ritankarsaha)
+[Harshil Khandelwal]()
