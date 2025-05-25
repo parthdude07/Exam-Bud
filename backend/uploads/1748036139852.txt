@@ -1,0 +1,31 @@
+[ERROR] Errors: 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testAddDocument
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testAddDocument2
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testContainsDocument
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testDeleteDocumentById
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testGetDocument
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testSetUp
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[ERROR] org.eclipse.sw360.datahandler.couchdb.DatabaseConnectorTest.testUpdateDocument
+[ERROR]   Run 1: DatabaseConnectorTest.setUp:48 » IllegalArgument At least one of iamProfileName or iamProfileId must be specified.
+[ERROR]   Run 2: DatabaseConnectorTest.tearDown:83 NullPointer Cannot invoke "org.eclipse.sw360.datahandler.cloudantclient.DatabaseConnectorCloudant.getInstance()" because "this.connector" is null
+[INFO] 
+[INFO] 
+[ERROR] Tests run: 226, Failures: 0, Errors: 7, Skipped: 0
