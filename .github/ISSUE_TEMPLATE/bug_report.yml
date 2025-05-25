@@ -1,0 +1,50 @@
+name: 🐛 Bug report
+description: Report a reproducible bug so we can fix it.
+title: "[BUG] "
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue! Please fill in as much detail as you can.
+
+  - id: os
+    type: dropdown
+    attributes:
+      label: **Platform**
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+
+  - id: version
+    type: input
+    attributes:
+      label: **Exam Bud version**
+      placeholder: e.g. `1.0.0`
+
+  - id: steps
+    type: textarea
+    attributes:
+      label: **Steps to reproduce**
+      description: Describe step-by-step how to trigger the bug.
+    validations:
+      required: true
+
+  - id: expected
+    type: textarea
+    attributes:
+      label: **Expected behavior**
+
+  - id: actual
+    type: textarea
+    attributes:
+      label: **What actually happened**
+
+  - id: logs
+    type: textarea
+    attributes:
+      label: **Logs / Screenshots**
+      description: Paste console output or screenshots if available.
