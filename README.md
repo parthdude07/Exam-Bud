@@ -32,7 +32,7 @@ Do a `cd ..` to get out of the frontend directory so that you can move out to th
 
 ```bash
 cd ..
-docker-compose up --build -d
+docker compose up --build -d
 ```
 NOTE - The `docker compose` command is to be ran at the `root`. This means you need to run this when your terminal shows you are in `exam-bud` only, not inside any other directory of `exam-bud`
 
