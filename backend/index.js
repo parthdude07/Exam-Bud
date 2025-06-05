@@ -1,9 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const multer = require('multer');
-const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const path = require('path');
 
 require('dotenv').config();
 const app = express();
@@ -18,13 +17,6 @@ app.use((req, res, next) => {
   req.user = { id, role };
   next();
 });
-
-// file upload setup
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/'),
-  filename:  (req, file, cb) => cb(null, Date.now()+path.extname(file.originalname))
-});
-const upload = multer({ storage });
 
 // Branch & semester & subject listings 
 app.get('/branches', async (req, res) => {
@@ -45,30 +37,8 @@ app.get('/semesters/:sid/subjects', async (req, res) => {
 });
 
 //  Uploads 
-app.get('/subjects/:sid/uploads', async (req, res) => {
-  const ups = await prisma.upload.findMany({
-    where: { subjectId: +req.params.sid },
-    include: { user: true }
-  });
-  res.json(ups);
-});
-app.post('/subjects/:sid/uploads', upload.single('file'), async (req, res) => {
-  const { title } = req.body;
-  const fileUrl = `/uploads/${req.file.filename}`;
-  const up = await prisma.upload.create({
-    data: {
-      title,
-      url: fileUrl,
-      subjectId: +req.params.sid,
-      userId: req.user.id
-    }
-  });
-  res.json(up);
-});
-app.delete('/uploads/:id', async (req, res) => {
-  const u = await prisma.upload.delete({ where: { id: +req.params.id } });
-  res.json(u);
-});
+const uploadRoutes = require('./src/routes/uploadRoutes.js');
+app.use('/', uploadRoutes);
 
 //  Discussions
 app.get('/subjects/:sid/discussions', async (req, res) => {
@@ -92,30 +62,8 @@ app.post('/subjects/:sid/discussions', async (req, res) => {
 });
 
 //  Labs 
-app.get('/subjects/:sid/labs', async (req, res) => {
-  const ls = await prisma.labMaterial.findMany({
-    where: { subjectId: +req.params.sid },
-    include: { user: true }
-  });
-  res.json(ls);
-});
-app.post('/subjects/:sid/labs', upload.single('file'), async (req, res) => {
-  const { title } = req.body;
-  const url = `/uploads/${req.file.filename}`;
-  const l = await prisma.labMaterial.create({
-    data: {
-      title,
-      url,
-      subjectId: +req.params.sid,
-      userId: req.user.id
-    }
-  });
-  res.json(l);
-});
-app.delete('/labs/:id', async (req, res) => {
-  const l = await prisma.labMaterial.delete({ where: { id: +req.params.id } });
-  res.json(l);
-});
+const labRoutes = require('./src/routes/labRoutes.js');
+app.use('/', labRoutes);
 
 app.listen(process.env.PORT, () =>
   console.log(` Backend running on http://localhost:${process.env.PORT}`)
