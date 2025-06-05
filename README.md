@@ -3,7 +3,7 @@
 Thought there would be a lot of steps, hehe ?
 
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
 Before you do all of these -- 
