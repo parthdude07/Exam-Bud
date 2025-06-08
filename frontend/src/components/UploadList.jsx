@@ -6,7 +6,8 @@ export default function UploadList({ subjectId }) {
   const [file, setFile] = useState(null);
 
   const load = ()=>fetch(`http://localhost:4000/subjects/${subjectId}/uploads`)
-    .then(r=>r.json()).then(setItems);
+    .then(r=>r.json())
+    .then(res => setItems(res.data));
 
   useEffect(load, [subjectId]);
 

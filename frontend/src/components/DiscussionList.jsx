@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 export default function DiscussionList({ subjectId }) {
   const [list, setList] = useState([]);
   const [txt, setTxt] = useState('');
-
+  
   const load = ()=>fetch(`http://localhost:4000/subjects/${subjectId}/discussions`)
-    .then(r=>r.json()).then(setList);
-
+  .then(r=>r.json())
+  .then(res => setList(res.data));
+  
   useEffect(load, [subjectId]);
-
+  
   const post = async e => {
     e.preventDefault();
     await fetch(`http://localhost:4000/subjects/${subjectId}/discussions`, {
