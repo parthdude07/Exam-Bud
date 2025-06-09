@@ -6,7 +6,7 @@ export default function Home() {
   useEffect(() => {
     fetch('http://localhost:4000/branches')
       .then(r => r.json())
-      .then(setBranches);
+      .then(res => setBranches(res.data));
   }, []);
   return (
     <div>

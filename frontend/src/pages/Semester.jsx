@@ -6,7 +6,8 @@ export default function Semester() {
   const [subs, setSubs] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:4000/semesters/${semesterId}/subjects`)
-      .then(r=>r.json()).then(setSubs);
+      .then(r=>r.json())
+      .then(res => setSubs(res.data));
   }, [semesterId]);
   return (
     <div>

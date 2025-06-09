@@ -6,7 +6,8 @@ export default function LabList({ subjectId }) {
   const [file, setFile] = useState(null);
 
   const load = ()=>fetch(`http://localhost:4000/subjects/${subjectId}/labs`)
-    .then(r=>r.json()).then(setLabs);
+    .then(r=>r.json())
+    .then(res => setLabs(res.data));
 
   useEffect(load, [subjectId]);
 

@@ -6,7 +6,8 @@ export default function Branch() {
   const [sems, setSems] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:4000/branches/${branchId}/semesters`)
-      .then(r=>r.json()).then(setSems);
+      .then(r=>r.json())
+      .then(res => setSems(res.data));
   }, [branchId]);
   return (
     <div>
