@@ -4,7 +4,7 @@ import Branch from './pages/Branch';
 import Semester from './pages/Semester';
 import Subject from './pages/Subject';
 import AdminDashboard from './pages/AdminDashboard';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/404/NotFound';
 
 export default function App() {
 
