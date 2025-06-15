@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import Home from './pages/Home';
 import Branch from './pages/Branch';
 import Semester from './pages/Semester';
@@ -12,7 +13,11 @@ import NotFound from './pages/404/NotFound';
 export default function App() {
     const location = useLocation();
 
-    const hideHeaderFooter = location.pathname === '/404'; // or match more robustly if needed
+    const [hideHeaderFooter, setHideHeaderFooter] = useState(false);
+
+    useEffect(()=> {
+        setHideHeaderFooter(false)
+    }, [location.pathname])
 
     return (
         <>
@@ -25,7 +30,7 @@ export default function App() {
                     <Route path="/branch/:branchId/semester/:semesterId" element={<Semester />} />
                     <Route path="/branch/:branchId/semester/:semesterId/subject/:subjectId" element={<Subject />} />
                     <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="*" element={<NotFound/>}/>
+                    <Route path="*" element={<NotFound setHideHeaderFooter={setHideHeaderFooter} />}/>
                 </Routes>
             </main>
             {!hideHeaderFooter && <Footer />}

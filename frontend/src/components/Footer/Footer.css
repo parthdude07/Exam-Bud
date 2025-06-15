@@ -14,34 +14,33 @@
 
 
 html {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
 }
 
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 body::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
 }
 
-/* Hide scrollbars for any element */
 * {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 *::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
 }
 
 

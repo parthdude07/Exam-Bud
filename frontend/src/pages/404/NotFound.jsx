@@ -1,8 +1,14 @@
 import './NotFound.css';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function NotFound() {
+export default function NotFound({ setHideHeaderFooter }) {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setHideHeaderFooter(true);
+        return () => setHideHeaderFooter(false);
+    }, [setHideHeaderFooter]);
 
     return (
         <div className="notFoundContainer">
