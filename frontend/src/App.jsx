@@ -7,6 +7,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import LandingPage from './pages/landingPage/LandingPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import NotFound from './pages/404/NotFound';
 
 export default function App() {
     const location = useLocation();
@@ -24,9 +25,11 @@ export default function App() {
                     <Route path="/branch/:branchId/semester/:semesterId" element={<Semester />} />
                     <Route path="/branch/:branchId/semester/:semesterId/subject/:subjectId" element={<Subject />} />
                     <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </main>
             {!hideHeaderFooter && <Footer />}
         </>
     );
+
 }
