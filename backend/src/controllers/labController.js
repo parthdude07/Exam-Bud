@@ -13,7 +13,7 @@ const fetchLab = async (req, res) => {
     where: { subjectId: +req.params.sid },
     include: { user: true }
   });
-  res.json(new ApiResponse(200, labMaterial, "fetched lab material successfully"));
+  res.json(new ApiResponse(200, labMaterial, "Fetched lab material successfully"));
 };
 
 const uploadLabMaterial = asyncHandler(async (req, res, next) => {
@@ -35,21 +35,42 @@ const uploadLabMaterial = asyncHandler(async (req, res, next) => {
 });
 
 const deleteLabMaterial = asyncHandler(async (req, res, next) => {
-  const file = await prisma.labMaterial.findUnique({
-    where: {id: +req.params.id}
-  })
+  try {
+    const file = await prisma.labMaterial.findUnique({
+      where: {id: +req.params.id}
+    })
+  
+    if(!file){
+      return next(new ApiError(404, "Lab material not found"))
+    }
+  
+    const public_id = file.title
+    try {
+      const result = await cloudinary.uploader.destroy(public_id);
 
-  if(!file){
-    return res.status(400).json(new ApiError(404, null, "File Not Found"))
+      if (result.result === "ok" || result.result === "not found") {
+        console.log(`Cloudinary: ${result.result === "ok" ? "File deleted" : "File not found (may already be deleted)"}.`);
+        try {
+          const deleted = await prisma.labMaterial.delete({
+            where: { id: +req.params.id }
+          });
+          return res.status(200).json(
+            new ApiResponse(200, " ", deleted, " Lab material deleted successfully")
+          );
+        } catch (error) {
+          return next(new ApiError(500, "File not deleted from database", error));
+        }
+      } else {
+        return next(new ApiError(500, "Unexpected result from Cloudinary", result));
+      }
+
+    } catch (error) {
+      return next(new ApiError(500, "Cloudinary deletion failed", error));
+    }
+
+  } catch (error) {
+    return next(new ApiError(500, "Failed to find lab material", error));
   }
-
-  const public_id = file.title
-  await cloudinary.uploader.destroy(public_id).then(result=>console.log(result))
-
-  const labMaterialToDelete = await prisma.labMaterial.delete({
-    where: { id: +req.params.id }
-  });
-  res.status(200).json(new ApiResponse(200, labMaterialToDelete, "lab material deleted successfully"));
 });
 
 module.exports = {fetchLab , uploadLabMaterial , deleteLabMaterial};

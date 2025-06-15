@@ -11,7 +11,7 @@ const fetchUploads = asyncHandler(async (req, res, next) => {
     where: { subjectId: +req.params.sid },
     include: { user: true }
   });
-  res.json(new ApiResponse(200, uploads, "fetched uploads successfully"));
+  res.json(new ApiResponse(200, uploads, "Fetched uploads successfully"));
 });
 
 const uploadMaterial = asyncHandler(async (req, res, next) => {
@@ -24,32 +24,51 @@ const uploadMaterial = asyncHandler(async (req, res, next) => {
     const upload = await prisma.upload.create({
       data: {
         title,
-        url, // Directly use the 'url' received from the frontend (Cloudinary URL)
+        url, 
         subjectId: +req.params.sid,
         userId: req.user.id
       }
     });
-    res.status(201).json(new ApiResponse(201, upload, "material uploaded successfully"))
+    res.status(201).json(new ApiResponse(201, upload, "Material uploaded successfully"))
 });
 
 const deleteUpload = asyncHandler(async (req, res, next) => {
-  // First delete from cloudinary
-  const file = await prisma.upload.findUnique({
-    where: {id: +req.params.id},
-  })
+  try {
+    const file = await prisma.upload.findUnique({
+      where: {id: +req.params.id}
+    })
+  
+    if(!file){
+      return next(new ApiError(404, "Material not found"))
+    }
+  
+    const public_id = file.title
+    try {
+      const result = await cloudinary.uploader.destroy(public_id);
 
-  if (!file) {
-    return res.status(404).json(new ApiResponse(404, null, "File Not Found"))
+      if (result.result === "ok" || result.result === "not found") {
+        console.log(`Cloudinary: ${result.result === "ok" ? "File deleted" : "File not found (may already be deleted)"}.`);
+        try {
+          const deleted = await prisma.upload.delete({
+            where: { id: +req.params.id }
+          });
+          return res.status(200).json(
+            new ApiResponse(200, " ", deleted, "Material deleted successfully")
+          );
+        } catch (error) {
+          return next(new ApiError(500, "File not deleted from database", error));
+        }
+      } else {
+        return next(new ApiError(500, "Unexpected result from Cloudinary", result));
+      }
+
+    } catch (error) {
+      return next(new ApiError(500, "Cloudinary deletion failed", error));
+    }
+
+  } catch (error) {
+    return next(new ApiError(500, "Failed to find material", error));
   }
-
-  const public_id = file.title
-  await cloudinary.uploader.destroy(public_id).then(result=>console.log(result));
-
-  // Then delete from prisma db
-  const deleted = await prisma.upload.delete({
-    where: { id: +req.params.id }
-  });
-  res.status(200).json(new ApiResponse(200, " ", deleted, " Deleted Succesfully"));
 });
 
 module.exports = { fetchUploads, uploadMaterial, deleteUpload };
