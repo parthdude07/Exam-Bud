@@ -103,16 +103,7 @@ const Loading = () => {
                     0% { opacity: 0.7; }
                     100% { opacity: 1; }
                 }
-
-                @keyframes bounce {
-                    0%, 80%, 100% {
-                        transform: scale(0);
-                    }
-                    40% {
-                        transform: scale(1);
-                    }
-                }
-
+                    
                 @keyframes spin {
                     0% { transform: rotate(0deg); }
                     100% { transform: rotate(360deg); }
