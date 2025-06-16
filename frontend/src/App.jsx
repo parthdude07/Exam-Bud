@@ -1,5 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { Routes, Route, useLocation, matchRoutes } from 'react-router-dom';
 import Home from './pages/Home';
 import Branch from './pages/Branch';
 import Semester from './pages/Semester';
@@ -10,18 +9,25 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import NotFound from './pages/404/NotFound';
 
+const routes = [
+    { path: '/' },
+    { path: '/home' },
+    { path: '/branch/:branchId' },
+    { path: '/branch/:branchId/semester/:semesterId' },
+    { path: '/branch/:branchId/semester/:semesterId/subject/:subjectId' },
+    { path: '/admin' },
+];
+
 export default function App() {
     const location = useLocation();
 
-    const [hideHeaderFooter, setHideHeaderFooter] = useState(false);
+    const matched = matchRoutes(routes, location.pathname);
 
-    useEffect(()=> {
-        setHideHeaderFooter(false)
-    }, [location.pathname])
+    const is404 = !matched;
 
     return (
         <>
-            {!hideHeaderFooter && <Header />}
+            {!is404 && <Header />}
             <main className="main-content">
                 <Routes>
                     <Route path="/home" element={<Home />} />
@@ -30,10 +36,10 @@ export default function App() {
                     <Route path="/branch/:branchId/semester/:semesterId" element={<Semester />} />
                     <Route path="/branch/:branchId/semester/:semesterId/subject/:subjectId" element={<Subject />} />
                     <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="*" element={<NotFound setHideHeaderFooter={setHideHeaderFooter} />}/>
+                    <Route path="*" element={<NotFound />}/>
                 </Routes>
             </main>
-            {!hideHeaderFooter && <Footer />}
+            {!is404 && <Footer />}
         </>
     );
 
