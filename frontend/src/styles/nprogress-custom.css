@@ -1,0 +1,38 @@
+
+
+#nprogress .bar {
+    background: linear-gradient(to right, #142d6f 0%, #4a67c4 50%, #667eea 100%) !important;
+    position: fixed !important;
+    z-index: 1031 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 4px !important;
+    box-shadow: 0 2px 8px rgba(20, 45, 111, 0.3) !important;
+}
+
+#nprogress .peg {
+    display: block !important;
+    position: absolute !important;
+    right: 0 !important;
+    width: 120px !important;
+    height: 100% !important;
+    box-shadow: 0 0 12px #142d6f, 0 0 8px #4a67c4 !important;
+    opacity: 1.0 !important;
+    transform: rotate(3deg) translate(0px, -4px) !important;
+    background: linear-gradient(to right, transparent, rgba(20, 45, 111, 0.8), #142d6f) !important;
+}
+
+#nprogress .spinner {
+    display: none !important;
+}
+
+@keyframes nprogress-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+#nprogress .bar {
+    animation: nprogress-pulse 2s ease-in-out infinite !important;
+}
