@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
+import texture from '../assets/texture.png'
 import backArrow from '../assets/back_arrow.svg';
 import Navbar from '../components/Navbar';
 
@@ -27,10 +27,12 @@ export default function Semester() {
     <>
       <Navbar />
       <div
-        className="body-font bg-blue-700 min-h-[90vh] w-screen w-full rounded-lg"
-        style={{ background: 'rgba(20, 45, 111, 1)' }}
+        className="body-font bg-blue-700 min-h-[80vh] w-screen  rounded-lg m-0 p-0"
+        style={{ background: 'rgba(20, 45, 111, 1)',
+          backgroundImage: `url(${texture})`,
+         }}
       >
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 pt-1 pb-2 mx-auto">
           <Link to={`/branch/${branchId}`}>
             {/* back button working */}
             <div className="relative mt-16 ml-2">
