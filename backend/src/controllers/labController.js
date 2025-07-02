@@ -3,6 +3,8 @@ const { ApiError } = require('../utils/ApiError.js');
 const { ApiResponse } = require('../utils/ApiResponse.js');
 const { asyncHandler } = require('../utils/asyncHandler.js');
 const prisma = new PrismaClient();
+const fs = require('fs');
+const path = require('path');
 
 const fetchLab = async (req, res) => {
   const labMaterial = await prisma.labMaterial.findMany({
@@ -30,11 +32,30 @@ const uploadLabMaterial = asyncHandler(async (req, res, next) => {
   res.json(new ApiResponse(201, labMaterials, "lab material uploaded successfully"));
 });
 
-const deleteLabMaterial = asyncHandler(async (req, res, next) => {
-    const labMaterialToDelete = await prisma.labMaterial.delete({
-      where: { id: +req.params.id }
+const deleteLabMaterial = async (req, res , next) => {
+  try {
+    const deleteLab = await prisma.labMaterial.findUnique({
+      where: {id: +req.params.id } 
     });
-    res.status(200).json(new ApiResponse(200, labMaterialToDelete, "lab material deleted successfully"));
-});
+
+    if (!deleteLab) {
+      return next(new ApiError(404, "Lab material not found"));
+    }
+
+    const filePath = path.join(__dirname, '..', '..', 'uploads', path.basename(deleteLab.url));
+
+    try {
+      fs.unlinkSync(filePath);
+    } catch (fileError) {
+      return next(new ApiError(500,"Could not delete this file"));
+    }
+
+    await prisma.labMaterial.delete({ where: {id: +req.params.id } });
+
+    res.json(new ApiResponse(201, deleteLab, "lab material deleted successfully"));
+  } catch (error) {
+    return next(new ApiError(500, "File is not deleted"));
+  }
+};
 
 module.exports = {fetchLab , uploadLabMaterial , deleteLabMaterial};

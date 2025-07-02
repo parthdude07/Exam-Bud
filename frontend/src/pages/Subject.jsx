@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import UploadList from '../components/UploadList';
 import DiscussionList from '../components/DiscussionList';
 import LabList from '../components/LabList';
+import Navbar from '../components/Navbar';
 import backArrow from '../assets/back_arrow.svg';
 
 export default function Subject() {
@@ -26,6 +27,7 @@ export default function Subject() {
   const subject = subs.find(s => s.id === parseInt(subjectId));
   return (
     <div>
+      <Navbar/>
       <div
       className="body-font bg-blue-700 min-h-[90vh] w-screen w-full rounded-lg"
       style={{ background: 'rgba(20, 45, 111, 1)' }}
