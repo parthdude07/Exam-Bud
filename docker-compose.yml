@@ -36,10 +36,12 @@ services:
     command: sh -c "
       echo 'waiting for database...';
       until nc -z db 5432; do sleep 1; done;
+      echo 'creating test database...';
+      PGPASSWORD=prisma psql -h db -U prisma -d exam_bud -c 'CREATE DATABASE exam_bud_test;' 2>/dev/null || echo 'Test database already exists';
       echo 'regenerating prisma client';
       npx prisma generate;
-      echo 'settin up database...';
-      npm run test:setup 2>/dev/null || echo 'setup skipped';
+      echo 'setting up database schema...';
+      npx prisma db push;
       echo 'running tests...';
       npm test"
     profiles:
