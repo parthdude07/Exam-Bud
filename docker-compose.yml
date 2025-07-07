@@ -22,6 +22,31 @@ services:
     volumes:
       - ./backend/uploads:/usr/src/app/uploads
 
+  test:
+    build: ./backend
+    environment:
+      DATABASE_URL: "postgresql://prisma:prisma@db:5432/exam_bud_test"
+      NODE_ENV: test
+    depends_on:
+      - db
+    working_dir: /usr/src/app
+    volumes:
+      - ./backend:/usr/src/app
+    entrypoint: []
+    command: sh -c "
+      echo 'waiting for database...';
+      until nc -z db 5432; do sleep 1; done;
+      echo 'creating test database...';
+      PGPASSWORD=prisma psql -h db -U prisma -d exam_bud -c 'CREATE DATABASE exam_bud_test;' 2>/dev/null || echo 'Test database already exists';
+      echo 'regenerating prisma client';
+      npx prisma generate;
+      echo 'setting up database schema...';
+      npx prisma db push;
+      echo 'running tests...';
+      npm test"
+    profiles:
+      - test
+
   frontend:
     build: ./frontend
     depends_on:
