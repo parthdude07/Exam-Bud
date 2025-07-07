@@ -25,7 +25,7 @@ export default function LabList({ subjectId, searchQuery = '' }) {
 
     return () => {
       try {
-        // No cleanup needed now, but placeholder added for safety
+        //  placeholder added for safety
       } catch (err) {
         console.error('Cleanup error in LabList:', err);
       }
