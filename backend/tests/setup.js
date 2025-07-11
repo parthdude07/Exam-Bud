@@ -41,6 +41,7 @@ afterEach(async () => {
         await prisma.subject.deleteMany();
         await prisma.semester.deleteMany();
         await prisma.branch.deleteMany();
+        await prisma.user.deleteMany();
     } catch (error) {
         console.warn('Cleanup warning:', error.message);
     }

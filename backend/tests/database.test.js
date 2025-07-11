@@ -231,6 +231,11 @@ describe('CRUD Operations Testing', () => {
                     subject: true 
                 }
             });
+            
+            expect(foundDiscussion).not.toBeNull();
+            expect(foundDiscussion.user).not.toBeNull();
+            expect(foundDiscussion.subject).not.toBeNull();
+
             expect(foundDiscussion.user.name).toBe('Test User');
             expect(foundDiscussion.subject.name).toBe('Test Subject');
         });

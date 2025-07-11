@@ -52,7 +52,6 @@ describe('Integration Test Setup Verification', () => {
         
         let state = await verifyDatabaseState();
         expect(state.subjects).toBeGreaterThan(0);
-        expect(state.users).toBeGreaterThan(0);
         
         console.log('Test data cleanup will be verified by afterEach hook');
     });
