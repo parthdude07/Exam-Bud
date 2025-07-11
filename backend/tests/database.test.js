@@ -40,11 +40,11 @@ describe('Database Error Handling', () => {
             await global.prisma.subject.findMany();
             const endTime = Date.now();
             expect(endTime - startTime).toBeLessThan(5000);
-            console.log(`✅ Query completed in ${endTime - startTime}ms`);
+            console.log(`Query completed in ${endTime - startTime}ms`);
             
         } catch(error) {
             expect(error).toBeDefined();
-            console.log('⚠️ Query failed but didnt hang: ', error.message);
+            console.log('Query failed but didnt hang: ', error.message);
         }
     }, 15000);
 
@@ -76,9 +76,18 @@ describe('Database Health Checks', () => {
 })
 
 describe('CRUD Operations Testing', () => {
-    let testBranch, testSemester, testSubjet, testUser;
+    let testBranch, testSemester, testSubject, testUser;
 
     beforeEach(async () => {
+        
+        await global.prisma.upload.deleteMany();
+        await global.prisma.discussion.deleteMany();
+        await global.prisma.labMaterial.deleteMany();
+        await global.prisma.subject.deleteMany();
+        await global.prisma.semester.deleteMany();
+        await global.prisma.branch.deleteMany();
+        await global.prisma.user.deleteMany();
+
         testBranch = await global.prisma.branch.create({
             data: { name: 'Test Branch' }
         });
@@ -173,7 +182,6 @@ describe('CRUD Operations Testing', () => {
             expect(found).toBeNull();
         });
         test('should find uploads by subject', async () => {
-            // Create multiple uploads for same subject
             await global.prisma.upload.createMany({
                 data: [
                     {
