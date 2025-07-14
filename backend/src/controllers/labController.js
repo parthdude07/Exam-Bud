@@ -55,7 +55,7 @@ const deleteLabMaterial = asyncHandler(async (req, res, next) => {
             where: { id: +req.params.id }
           });
           return res.status(200).json(
-            new ApiResponse(200, " ", deleted, " Lab material deleted successfully")
+            new ApiResponse(200, deleted, "Lab material deleted successfully")
           );
         } catch (error) {
           return next(new ApiError(500, "File not deleted from database", error));
