@@ -12,6 +12,8 @@ const Subject = lazy(() => import('./pages/Subject'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const NotFound = lazy(() => import('./pages/404/NotFound'));
 const LoginPage = lazy(() => import('./pages/Login/Login'));
+const SignUp = lazy(() => import('./pages/SignUp/SignUp'));
+
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 const routes = [
@@ -21,9 +23,8 @@ const routes = [
     { path: '/branch/:branchId/semester/:semesterId' },
     { path: '/branch/:branchId/semester/:semesterId/subject/:subjectId' },
     { path: '/admin' },
-    { path: '/login' }
-
-
+    { path: '/login' },
+    { path: '/signup' }
 ];
 
 export default function App() {
@@ -46,7 +47,8 @@ export default function App() {
                         <Route path="/branch/:branchId/semester/:semesterId" element={<Semester />} />
                         <Route path="/branch/:branchId/semester/:semesterId/subject/:subjectId" element={<Subject />} />
                         <Route path="/admin" element={<AdminDashboard />} />
-                        <Route path="/login" element={<LoginPage />} /> 
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignUp />} /> 
                         <Route path="*" element={<NotFound />}/>
                       </Routes>
                   </Suspense>

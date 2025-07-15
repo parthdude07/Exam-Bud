@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
-import './Login.css';
-import { FaKey,FaEye,FaEyeSlash, } from "react-icons/fa";
+import './SignUp.css';
+import { FaKey } from "react-icons/fa";
 import { MdMailOutline } from "react-icons/md";
 
-const LoginPage = ({ onLogin }) => {
+const SignUp = ({ onLogin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-
 
   const handleClose = () => {
     navigate("/");
@@ -41,14 +39,14 @@ const LoginPage = ({ onLogin }) => {
   
 
   return (
-    <div className="login-overlay">
-      <div className="login-container">
-        <button className="login-close" onClick={handleClose} >&times;</button>
-        <div className="login-box">
-          
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h2 className="login-title">Log In</h2>
-            <div className="login-field">
+    <div className="SignUp-overlay">
+      <div className="SignUp-container">
+        <button className="SignUp-close" onClick={handleClose} >&times;</button>
+        <div className="SignUp-box">
+
+          <form className="SignUp-form" onSubmit={handleSubmit}>
+            <h2 className="SignUp-title">Sign Up</h2>
+            <div className="SignUp-field">
               <label htmlFor="email"><MdMailOutline />Enter Institute's Email ID</label>
               <input
                 id="email"
@@ -59,25 +57,19 @@ const LoginPage = ({ onLogin }) => {
                 required
               />
             </div>
-            <div className="login-field">
-              <label htmlFor="password"><FaKey />Password</label>
-              <div className="password-input-wrapper">
+            <div className="SignUp-field">
+              <label htmlFor="password"><FaKey />Create Password</label>
                 <input
                   id="password"
-                  type={showPassword ? "text" : "password"}
+                  type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="Must be 8 characters"
                   minLength="8"
                   required
                 />
-                <button type="button" className="show-password-btn" onClick={() => setShowPassword(!showPassword)}
-                  aria-label="Toggle password visibility">
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
             </div>
-            <div className="login-options">
+            <div className="SignUp-options">
               <label className="remember-me">
                 <input
                   type="checkbox"
@@ -86,13 +78,12 @@ const LoginPage = ({ onLogin }) => {
                 />
                 Remember me
               </label>
-              <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
             </div>
-            {error && <div className="login-error">{error}</div>}
-            <button type="submit" className="login-btn">Login</button>
-            <div className="login-footer">
-              <span>Don't have an account?</span>
-              <Link to="/signup" className="sign-up-link">Register</Link>
+            {error && <div className="SignUp-error">{error}</div>}
+            <button type="submit" className="SignUp-btn">Sign Up</button>
+            <div className="SignUp-footer">
+              <span>Already have an account?</span>
+              <Link to="/login" className="login-link">Log In</Link>
             </div>
           </form>
           
@@ -102,4 +93,4 @@ const LoginPage = ({ onLogin }) => {
   );
 };
 
-export default LoginPage;
+export default SignUp;
