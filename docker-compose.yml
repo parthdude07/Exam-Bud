@@ -30,8 +30,6 @@ services:
     depends_on:
       - db
     working_dir: /usr/src/app
-    volumes:
-      - ./backend:/usr/src/app
     entrypoint: []
     command: sh -c "
       echo 'waiting for database...';
